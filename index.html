@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life City - لايف سيتي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="glass-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    
+    <header>
+        <div class="logo-area">
+            <img src="logo.webp" alt="Life City" class="header-logo">
+            <span class="brand-name">Life City</span>
+        </div>
+        <nav id="main-nav">
+            <a onclick="showSection('home')" class="nav-link active">الرئيسية</a>
+            <a onclick="showSection('rules')" class="nav-link">القوانين</a>
+            <a onclick="showSection('store')" class="nav-link">المتجر</a>
+            <a onclick="showSection('jobs')" class="nav-link">تقديم وظائف</a>
+            <div class="dropdown">
+                <a class="nav-link">السيرفرات</a>
+                <div class="dropdown-content">
+                    <a href="https://discord.gg/nRZxSdx6" target="_blank" class="dropdown-item">سيرفر الفايتات</a>
+                    <a href="https://discord.gg/UA8vhz3D" target="_blank" class="dropdown-item">سيرفر العصابات RP</a>
+                </div>
+            </div>
+            <a onclick="showSection('members')" class="nav-link">المؤسسين</a>
+            <a onclick="showSection('activation')" class="nav-link">التفعيل</a>
+        </nav>
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Activation Section -->
+    <section id="activation">
+        <div class="container">
+            <div class="section-title">
+                <h2>التفعيل</h2>
+                <div class="title-line"></div>
+            </div>
+            
+            <div id="terms-container" class="activation-card">
+                <div class="terms-content">
+                    <h3>الشروط العامة</h3>
+                    <ul>
+                        <li>العمر المسموح لدخول السيرفر: 13 سنة فما فوق.</li>
+                        <li>ممنوع استخدام أي شخصية افتراضية إلا من خلال المتجر فقط.</li>
+                        <li>ممنوع كتابة أسمك باللغة الإنجليزية أو برموز أو تشكيل أو يكون اسم شخصيه مشهوره.</li>
+                        <li>يمنع الدخول من أجهزة غير جهازك الشخصي.</li>
+                        <li>يحق لك امتلاك شخصتين فقط.</li>
+                    </ul>
+                </div>
+                <div class="activation-buttons">
+                    <button class="btn-agree" onclick="acceptTerms()">
+                        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" class="btn-icon">
+                        الموافقة على الشروط
+                    </button>
+                    <button class="btn-disagree" onclick="showSection('home')">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" class="btn-icon">
+                        غير موافق على الشروط
+                    </button>
+                </div>
+            </div>
+
+            <div id="activation-form-container" class="activation-card" style="display: none;">
+                <form id="activation-form" onsubmit="submitActivation(event)">
+                    <div class="form-part">
+                        <h3>الجزء الأول: معلومات الشخصية</h3>
+                        
+                        <div class="form-group">
+                            <label>اكتب يوزرك ديسكورد؟ *</label>
+                            <input type="text" name="discord_user" required placeholder="مثال: name#0000">
+                        </div>
+
+                        <div class="form-group">
+                            <label>اكتب يوزرك روبلوكس؟ *</label>
+                            <input type="text" name="roblox_user" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>شرفنا باسمك وعمرك الحقيقيين؟ *</label>
+                            <input type="text" name="real_info" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>اسم الشخصية الأول والأخير وتاريخ ميلادها والمنشئ واللغة الخاصه بالشخصية؟ *</label>
+                            <input type="text" name="char_info" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ماهي قصة الشخصية؟ ( لاتقل عن 5 اسطر ولا تزيد عن 10 اسطر ) *</label>
+                            <textarea name="char_story" required rows="5"></textarea>
+                            <small>يوجد تعريف لكيفية الكتابة في الديسكورد يرجى مراجعته قبل كتابة القصة.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ماهي ايجابيات وسلبيات الشخصية من القصة؟ *</label>
+                            <textarea name="pros_cons" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>هل لديك خبرة سابقة في تقمص الشخصيات؟ اكتب عنها بالتفصيل *</label>
+                            <textarea name="experience" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ماهوا سبب رغبتك في دخول المدينة؟ *</label>
+                            <textarea name="reason" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-part">
+                        <h3>الجزء الثاني: كيف ستتصرف شخصيتك؟</h3>
+                        <p class="form-note">يرجى ربط تصرفاتك بالمواقف التالية بشخصيتك, علما أن عدم مطابقة تصرفات شخصيتك للبيانات المذكوره في الجزء الاول يقلل فرص قبولك.</p>
+
+                        <div class="form-group">
+                            <label>انت الان تحمل سلاح ناري توجهت لتبحث عن رهينة لتقوم بسطو مسلح على أحد المتاجر اكتشفت ان الشخص الذي اختطفته شخص ذو سلطة اجرامية في المدينة ماذا ستفعل في هذا الموقف؟ *</label>
+                            <textarea name="scenario_1" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>بعد توجهك الى احدى الاحياء الخطيرة في المدينة وجدت سيارة مركونة في أحد الازقة وداخلها شحنة قد تكون مواد مخدرة ماذا ستفعل؟ *</label>
+                            <textarea name="scenario_2" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>أنت تقوم بإصلاح سيارتك, قام شخص بسحب سلاحه خلفك وامرك برمي اغراضك وتسليم مفاتيح سيارتك. ماذا ستقول وماذا ستفعل في هذه الحالة؟ *</label>
+                            <textarea name="scenario_3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>يوم روتيني لك كسائق اجره اتصل عليك شخصين, الاول يحتاج توصيله من العمل الى منزله في احد الاحياء الفارهه بمبلغ 13$, اما الثاني يحتاج توصيله من ساندي شور الى احد الاحياء المشبوهة جنوب المدينة. ماذا ستختار ولماذا؟ *</label>
+                            <textarea name="scenario_4" required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">تم الانتهاء</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="banner-section">
+            <img src="logo.webp" class="hero-logo" alt="Life City Logo">
+            <div class="banner-content">
+                <h1>Life City</h1>
+                <p>سيرفر لايف سيتي هو مجتمع متكامل يهدف لتقديم تجربة حياة واقعية فريدة من نوعها، نركز على الاحترافية والعدالة وبناء مجتمع مترابط وممتع لجميع اللاعبين.</p>
+                <a href="https://discord.gg/li-1" class="dsc-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" class="dsc-icon" alt="Discord">
+                    تسجيل دخول عبر ديسكورد
+                </a>
+                <a href="https://x.com/LifeCityCfw" target="_blank" class="dsc-btn x-btn">
+                    <img src="https://abs.twimg.com/favicons/twitter-pip.2.ico" class="dsc-icon" alt="X">
+                    حسابنا في X
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section id="rules">
+        <div class="container">
+            <div class="section-title">
+                <h2>قوانين السيرفر</h2>
+                <div class="title-line"></div>
+            </div>
+            
+            <div class="rules-grid">
+                <!-- قوانين الحياة الجديدة - NLR -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/10433/10433048.png" class="rule-icon-img" alt="Icon">
+                        <h3>قوانين الحياة الجديدة - NLR</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <p>في حال اغمائك بشكل كامل لا يمكنك الكلام او الحركة او فعل أي شيء في حال تم اسقاطك من قبل شخص و تم انعاشك من قبل مسعفين تستطيع تذكر جميع الاحداث في حال تم اعطائك ابرة "في العيادة الخاصة" من احد اللاعبين اللذين لديهم عداوة معك لا تستطيع تذكر أي شي حصل لك ( منها العداوات او الاحداث )</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الباور جيمنج - PowerGaming -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/8002/8002123.png" class="rule-icon-img" alt="Icon">
+                        <h3>الباور جيمنج - PowerGaming</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <p>استخدام الوسائل غير موجودة في اللعبة للحصول على ميزة أو عدم التوافق مع العالم بطريقة معقولة وبشكل واقعي ومنها التالي وهناك الكثير من المواقف والامثلة التي تندرج تحت Powergaming</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الخوف على الحياة - NVL -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1022/1022331.png" class="rule-icon-img" alt="Icon">
+                        <h3>الخوف على الحياة - NVL</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <p>عدم الخوف بشكل واقعي على حياتك عندما تتعرض للتهديد بالأسلحة أو بأذى شديد من وسائل أخرى يعتبر الخوف على الحياة شي اساسي ومهم جدا مثال : اذا كان هناك اداة تعرض حياتك للخطر</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الميتا جيمنج Metagaming -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1491/1491214.png" class="rule-icon-img" alt="Icon">
+                        <h3>الميتا جيمنج Metagaming</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <p>اي معلومة تحصل عليها من خارج المدينة مثال معلومة حصلت عليها من بث او دسكورد او مقطع باليوتيوب كلها تعتبر مخالفة</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القتل العشوائي - RDM -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4341/4341139.png" class="rule-icon-img" alt="Icon">
+                        <h3>القتل العشوائي - RDM</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <p>قتل الأشخاص دون سبب, تهديد, بصورة عشوائية او بدون عداوة يعتبر القتل العشوائي ممنوع ومخالف للنظام العام للسيرفر.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قانون تقدير الحياة - Life City -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3364/3364789.png" class="rule-icon-img" alt="Icon">
+                        <h3>قانون تقدير الحياة - Life City</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <p>هي الحفاظ على حياتك وحياة الآخرين، وعدم التهور، وأن لا تستهين بقتل الأشخاص، وأن لا تقاوم المجرم أو الشرطة او اي شحص يحمل سلاح مهما كان خصوصاُ اذا كنت أعزل، وهذا لا يمنع استعمال حق الدفاع عن النفس عند الضرورة التي تمنعك من طلب مساعدة الشرطة، وبكل الأحوال يجب محاورة اللاعب بشكل جيد والتفاوض معه قبل الشروع بأي عمل يعرض حياة اللاعب الآخر للخطر.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القوانين العامة -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" class="rule-icon-img" alt="Icon">
+                        <h3>القوانين العامة والشروط</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <h4 style="color: var(--primary-light); margin-bottom: 10px;">📌 شروط عامة</h4>
+                            <ul style="margin-bottom: 20px;">
+                                <li>العمر المسموح لدخول السيرفر: 13 سنة فما فوق.</li>
+                                <li>ممنوع استخدام أي شخصية افتراضية إلا من خلال المتجر فقط.</li>
+                                <li>ممنوع كتابة أسمك باللغة الإنجليزية أو برموز أو تشكيل أو يكون اسم شخصيه مشهوره.</li>
+                                <li>يمنع الدخول من أجهزة غير جهازك الشخصي.</li>
+                                <li>يحق لك امتلاك شخصتين فقط.</li>
+                            </ul>
+
+                            <h4 style="color: var(--primary-light); margin-bottom: 10px;">🎥 اللعب والبث</h4>
+                            <ul style="margin-bottom: 20px;">
+                                <li>ممنوع الستريم سنايب أو متابعة البثوث أثناء اللعب (عقوبتها شديدة).</li>
+                                <li>ممنوع التواجد في الديسكورد أو التواصل الخارجي مع لاعبين آخرين أثناء اللعب.</li>
+                            </ul>
+
+                            <h4 style="color: var(--primary-light); margin-bottom: 10px;">🧑🏾‍💼 القوانين العامة داخل السيرفر</h4>
+                            <ul>
+                                <li>ممنوع الاعتداء على البوتات (يعتبرون مواطنين).</li>
+                                <li>ممنوع طلب تعويض عند خسارة أموالك أو أغراضك بسبب التحلل أو المستشفى.</li>
+                                <li>ممنوع الكتابة خارج “الرول بلاي” في تطبيق تويتر، ويمكن الكتابة فقط في الأمور الداخلة في إطار التمثيل وتقمص الشخصيات والسيناريوهات والأمور المكملة لها.</li>
+                                <li>لا يحق لك الدخول في أحداث كبيرة مثلا ( بيع وشراء ) إلا إذا كان بينكم معرفة رول بلاي لمدة لا تقل عن أسبوع.</li>
+                                <li>يمنع القذف، الشتم، الطائفية، السياسة، الدين، أو القبلية (العقوبة: باند نهائي).</li>
+                                <li>يمنع استخدام كلمات غير مفهومة، مشفرة، أو سب مبطن.</li>
+                                <li>يمنع استغلال خدمات الجوال (مثل طلب تاكسي أو خدمات) بهدف الخطف أو القتل.</li>
+                                <li>يمنع توزيع مبالغ مالية كبيرة (10 آلاف فأكثر) إلا إذا كان بينكم معرفة لا تقل عن أسبوع.</li>
+                                <li>يمنع مشاركة أي من حساباتك أو معلوماتك الشخصية (سناب، إنستا، ستيم، ديسكورد... إلخ) مع أي شخص (العقوبة: باند نهائي).</li>
+                                <li>يمنع حمل شخصين في نفس الوقت (حمل + سحب) مهما كانت الأسباب.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القيادة -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/741/741407.png" class="rule-icon-img" alt="Icon">
+                        <h3>قوانين القيادة</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <p>القيادة يجب أن تكون واقعية:</p>
+                            <ul>
+                                <li>لا سرعة مفرطة بدون سبب.</li>
+                                <li>لا قطع إشارات عشوائي.</li>
+                                <li>لا تهور بدون داعٍ.</li>
+                                <li>مخالفة هذه القوانين = تحذير Power Gaming أو باند.</li>
+                                <li>يمنع استخدام حركه رفع الدباب و النط من أي مكان سواء الأرصفة القصيرة و ذلك يتضمن ( الجسور - الجدران - المباني - العوائق التي تجعل الدباب يرتفع الى السماء )</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- نظام الوورنات -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" class="rule-icon-img" alt="Icon">
+                        <h3>نظام الوورنات (التحذيرات)</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <p>|| للتنبيه الورنات ليست العقوبه الوحيده للمخالفين يوجد بعض المخالفات مستثناء من الورنات ||</p>
+                            <ul>
+                                <li>1 >> وارن >> بدون اي اجراء.</li>
+                                <li>2 >> وارن >> باند 12 ساعة.</li>
+                                <li>3 >> وارن >> بدون اي اجراء.</li>
+                                <li>4 >> وارن >> باند 24 ساعة.</li>
+                                <li>5 >> وارن >> بدون اي اجراء.</li>
+                                <li>6 >> وارن >> باند 3 ايام.</li>
+                                <li>7 >> وارن >> بدون اي اجراء.</li>
+                                <li>8 >> وارن >> باند 7 ايام.</li>
+                                <li>9 >> وارن >> بدون اب اجراء.</li>
+                                <li>10 >> وارن >> باند 10 ايام.</li>
+                                <li>11 >> وارن >> بدون اي اجراء.</li>
+                                <li>12 >> وارن >> باند اسبوعين.</li>
+                                <li>13 >> وارن >> بدون اي اجراء.</li>
+                                <li>14 >> وارن >> باند 3 اسابيع.</li>
+                                <li>15 >> باند ثلاث أشهر او نهائي.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قوانين الشرطة -->
+                <div class="rule-card" onclick="toggleCard(this)">
+                    <div class="rule-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2563/2563351.png" class="rule-icon-img" alt="Icon">
+                        <h3>قوانين الشرطة</h3>
+                    </div>
+                    <div class="rule-body" onclick="event.stopPropagation()">
+                        <div class="rule-desc" style="display: block; background: none; border: none; padding-top: 0;">
+                            <h4 style="color: var(--primary-light); margin-bottom: 10px;">إيقاف الخدمات والمداهمات</h4>
+                            <ul style="margin-bottom: 20px;">
+                                <li>1 - يحق للضابط وما فوق برفع طلب إيقاف خدمات الى المحكمة لا يمكن تنفيذ إيقاف الخدمات الا من خلال حكم من المحكمة</li>
+                                <li>2 - يتم طلب المداهمة من خلال الضباط وما فوق ولا يمكن مداهمة أي شخص الا من خلال أمر تنفيذ من المحكمة</li>
+                                <li>3 - في حال حدوث أي مخالفه سواء بـالرول بلاي او قوانين الشرطة سوف يتم محاسبة مسؤول الحالة فقط ويتحمل مسؤولية الأفراد</li>
+                                <li>4- يجب على العسكري عدم إخراج السلاح الا بعد ان يقوم المجرم بأخرج اي سلاحه</li>
+                                <li>5 - يجب على العسكري استخدام نفس فئة الأسلحة "خفيف, ثقيل" المستخدمة من المجرم بـ استثناء أوامر القيادة.</li>
+                                <li>6 - على جميع العساكر والأفراد عدم استخدام الأسلحة النارية في حال استخدام المجرم سلاح أبيض الا في حالة مهاجمة المجرم للعسكري.</li>
+                                <li>7 - في حال التفرقة بين المواطنين في التعامل سواء التفاوض مع مجرم او التعامل مع مسعف او مع مواطن بسوء سيتم تحويل الموضوع رقابياً وأن يتم التعامل الكامل بالرول وفي حدوده فقط</li>
+                            </ul>
+                            
+                            <h4 style="color: var(--primary-light); margin-bottom: 10px;">سلوك رجل الأمن</h4>
+                            <p>يجب أن يكون رجل الأمن مهذب تجاه المواطنين ومع زملائهم , يجب أن يكون لبقاً في أداء واجبه، متحكم في اعصابه ويتحمل أقصى درجات الصبر والتقدير. لا يجوز لهم استخدام لغة أو إيماءات بذيئة أو عنيفة تجاه المواطنين أو زملائه في شرطة ريسبيكت.</p>
+                            <p>لا يجوز لرجال الأمن ارتكاب أي عمل من أعمال الفساد. وعليهم أيضا معارضة ومكافحة كل هذه الأعمال بصرامة و الإبلاغ عنها.</p>
+                            <p>يجب على رجال الأمن تطبيق القانون ، في أدائهم لواجبهم ، احترام وحماية كرامة الإنسان والحفاظ على حقوق الإنسان لجميع الأشخاص ودعمها.</p>
+                            <p>تعتبر الخيانة او التمرد انهيارًا خطيرًا في الانضباط والنظام داخل حكومة ريسبيكت. لذلك، فإن أي رجل امن يكون متمردًا تجاه حكومة ريسبيكت يخضع لإجراءات تأديبية قد تؤدي إلى إنهاء الخدمة أو الإعدام بالرصاص.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Section -->
+    <section id="store">
+        <div class="coming-soon-card">
+            <h2>المتجر</h2>
+            <p>قريباً جداً... نجهز لكم تجربة تسوق مميزة وحصرية</p>
+            <div class="job-status">COMING SOON</div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section id="jobs">
+        <div class="coming-soon-card">
+            <h2>تقديم وظائف</h2>
+            <div class="job-btns">
+                <div class="job-btn">تقديم الشرطة</div>
+                <div class="job-btn">تقديم الصحة</div>
+                <div class="job-btn">تقديم وزارة العدل</div>
+            </div>
+            <div class="job-status">التقديمات مغلقة حالياً</div>
+        </div>
+    </section>
+
+    <!-- Founders Section -->
+    <section id="members">
+        <div class="section-title">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="section-icon-img" alt="Icon">
+            <h2>المؤسسين</h2>
+            <div class="title-line"></div>
+        </div>
+        <div class="members-grid">
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <img class="member-avatar" src="naif.webp" alt="ابو نايف">
+                </div>
+                <h3>ابو نايف</h3>
+                <p> الاونر شيب و مبرمج الماب </p>
+            </div>
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <img class="member-avatar" src="khaled.png" alt="خالد الهاجري">
+                </div>
+                <h3>خالد الهاجري</h3>
+                <p>اونر و مسؤول عن سيرفر و مشرف الادارة و الرقابة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activation Section -->
+    <section id="activation">
+        <div class="coming-soon-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/1160/1160515.png" style="width: 80px; margin-bottom: 20px;" alt="Activation Icon">
+            <h2>التفعيل</h2>
+            <p>غدا سوف يتم اضافته</p>
+            <div class="job-status" style="background: rgba(147, 51, 234, 0.2); color: var(--primary-light);">14/2/2026</div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
